@@ -1,4 +1,4 @@
-# bbPortScanner
+# Port Scanner
 
 ## Installation
 1. curl -o port_scanner.py https://github.com/batubyte/Port-Scanner/raw/refs/heads/main/port_scanner.py
