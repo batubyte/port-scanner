@@ -1,4 +1,4 @@
-# Port-Scanner
+# Port Scanner
 Nmap wrapper for port scanning
 
 ## Installation
