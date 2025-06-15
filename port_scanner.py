@@ -2,7 +2,7 @@
 
 """
 Project: Port Scanner
-Description: Installs and runs nmap with colored scan results.
+Description: Installs and runs nmap with colored scan results
 Author: batubyte
 Date: 2025-15-06
 """
@@ -25,7 +25,7 @@ def install_nmap():
     if shutil.which("nmap") is not None:
         return
 
-    answer = input("Nmap not found. Install now? [Y/n]: ").strip().lower()
+    answer = input("Nmap not found. Install? [Y/n]: ").strip().lower()
     if answer not in ("", "y", "yes"):
         sys.exit(1)
 
