@@ -88,12 +88,12 @@ def main():
         if len(sys.argv) < 2:
             subprocess.run(["nmap", "-h"])
             sys.exit(0)
-            
+
         nmap(sys.argv[1:])
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
