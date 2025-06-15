@@ -43,33 +43,32 @@ def install_nmap():
         sys.exit(1)
 
 
-def color_state(state):
-    state = state.lower()
-    if state == "open":
-        return f"{GREEN}{state}{RESET}"
-    elif state == "closed":
-        return f"{RED}{state}{RESET}"
-    elif state == "filtered":
-        return f"{YELLOW}{state}{RESET}"
-    else:
-        return state
-
-
 def print_output(output):
     ports_section = False
     for line in output.splitlines():
         line = line.strip()
-        if line.startswith("Nmap scan report for"):
+
+        state_colored = None
+        if ports_section and re.match(r"^\d+\/\w+\s", line):
+            port, state, *rest = line.split()
+            state_lower = state.lower()
+            if state_lower == "open":
+                state_colored = f"{GREEN}{state}{RESET}"
+            elif state_lower == "closed":
+                state_colored = f"{RED}{state}{RESET}"
+            elif state_lower == "filtered":
+                state_colored = f"{YELLOW}{state}{RESET}"
+            else:
+                state_colored = state
+
+            service = rest[0] if rest else ""
+            print(f"{port:10} {state_colored:10} {service}")
+        elif line.startswith("Nmap scan report for"):
             print(f"\n{CYAN}{line}{RESET}")
             ports_section = False
         elif line.startswith("PORT"):
             print(f"{BOLD}{line}{RESET}")
             ports_section = True
-        elif ports_section and re.match(r"^\d+\/\w+\s", line):
-            port, state, *rest = line.split()
-            state_colored = color_state(state)
-            service = rest[0] if rest else ""
-            print(f"{port:10} {state_colored:10} {service}")
         else:
             print(line)
 
