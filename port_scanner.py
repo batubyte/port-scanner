@@ -8,14 +8,19 @@ Date: 2025-15-06
 """
 
 import subprocess
-import argparse
-import textwrap
 import platform
 import shutil
 import sys
-
+import re
 
 VERSION = "0.1.0"
+
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+CYAN = "\033[36m"
+BOLD = "\033[1m"
+RESET = "\033[0m"
 
 
 def install_nmap():
@@ -40,40 +45,51 @@ def install_nmap():
         sys.exit(1)
 
 
-def nmap(target: str, ports: str, timing: str = "4", aggressive: bool = False):
-    cmd = ["nmap", target, "-T" + timing, "-v"]
+def color_state(state):
+    state = state.lower()
+    if state == "open":
+        return f"{GREEN}{state}{RESET}"
+    elif state == "closed":
+        return f"{RED}{state}{RESET}"
+    elif state == "filtered":
+        return f"{YELLOW}{state}{RESET}"
+    else:
+        return state
 
-    if aggressive:
-        cmd.append("-A")
-    if ports:
-        cmd.extend(["-p", ports])
 
+def print_output(output):
+    ports_section = False
+    for line in output.splitlines():
+        line = line.strip()
+        if line.startswith("Nmap scan report for"):
+            print(f"\n{CYAN}{line}{RESET}")
+            ports_section = False
+        elif line.startswith("PORT"):
+            print(f"{BOLD}{line}{RESET}")
+            ports_section = True
+        elif ports_section and re.match(r"^\d+\/\w+\s", line):
+            port, state, *rest = line.split()
+            state_colored = color_state(state)
+            service = rest[0] if rest else ""
+            print(f"{port:10} {state_colored:10} {service}")
+        else:
+            print(line)
+
+
+def nmap(args):
+    cmd = ["nmap"] + args
     result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    print(result.stdout)
-
-
-def parse_args():
-    parser = argparse.ArgumentParser(epilog=textwrap.dedent("""
-    examples:
-        python3 port_scanner.py scanme.nmap.org
-        python3 port_scanner.py 192.168.1.1 -p 22,80,443
-        python3 port_scanner.py example.com -a -t 5
-    """), formatter_class=argparse.RawTextHelpFormatter)
-    parser.add_argument("target", help="IP address or domain")
-    parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {VERSION}")
-    parser.add_argument("-p", "--ports", help="(e.g. 22,80,443 or 1-65535)")
-    parser.add_argument("-t", "--timing", default="4", choices=["0", "1", "2", "3", "4", "5"],
-                        help="(0=slow and stealthy, 5=fast and risky). Default: 4")
-    parser.add_argument("-a", "--aggressive", action="store_true",
-                        help="OS and service detection")
-    return parser.parse_args()
+    print_output(result.stdout)
 
 
 def main():
     try:
         install_nmap()
-        args = parse_args()
-        nmap(args.target, ports=args.ports, timing=args.timing, aggressive=args.aggressive)
+        if len(sys.argv) < 2:
+            subprocess.run(["nmap", "-h"])
+            sys.exit(0)
+            
+        nmap(sys.argv[1:])
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)
