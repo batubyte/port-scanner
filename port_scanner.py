@@ -2,7 +2,7 @@
 
 """
 Project: Port Scanner
-Description: Nmap wrapper for port scanning
+Description: Installs and runs nmap with colored scan results.
 Author: batubyte
 Date: 2025-15-06
 """
@@ -12,8 +12,6 @@ import platform
 import shutil
 import sys
 import re
-
-VERSION = "0.1.0"
 
 RED = "\033[31m"
 GREEN = "\033[32m"
