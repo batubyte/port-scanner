@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 
-# Installation
-## curl -o port_scanner.py https://example.com/path/to/file.py
-## curl -LsSf https://astral.sh/uv/install.sh | sh
-## uv run port_scanner.py
-
 """
-Project: PortScanner
+Project: Port Scanner
 Description: Nmap wrapper for port scanning
 Author: batubyte
 Date: 2025-15-06
