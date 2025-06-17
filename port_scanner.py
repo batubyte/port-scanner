@@ -122,7 +122,7 @@ def main():
     parser = argparse.ArgumentParser(description=DESCRIPTION)
     args = parse_args(parser)
         
-    if args.n:
+    if args.n is not None:
         install_nmap()
         if len(args.n) == 0:
             subprocess.run(["nmap", "-h"])
