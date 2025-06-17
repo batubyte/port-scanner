@@ -37,8 +37,17 @@ def install_nmap():
 
     system = platform.system()
     if system == "Linux":
-        subprocess.run(["sudo", "apt-get", "update"], check=True)
-        subprocess.run(["sudo", "apt-get", "install", "-y", "nmap"], check=True)
+        if shutil.which("apt-get"):
+            subprocess.run(["sudo", "apt-get", "update"], check=True)
+            subprocess.run(["sudo", "apt-get", "install", "-y", "nmap"], check=True)
+        elif shutil.which("dnf"):
+            subprocess.run(["sudo", "dnf", "install", "-y", "nmap"], check=True)
+        elif shutil.which("yum"):
+            subprocess.run(["sudo", "yum", "install", "-y", "nmap"], check=True)
+        else:
+            print("No supported package manager found. Install nmap manually.")
+            sys.exit(1)
+            
     elif system == "Windows":
         print("Install nmap from https://nmap.org/download.html#windows")
         print("Restart system after installation")
