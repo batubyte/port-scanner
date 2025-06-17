@@ -1,5 +1,7 @@
 # Port Scanner
 
+![image](https://github.com/user-attachments/assets/d987db90-aefd-4b9c-a828-7bfe7387e334)
+
 ## Installation
 ### Linux
 1. cd ~/Documents
