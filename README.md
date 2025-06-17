@@ -17,5 +17,5 @@
 6. uv python install
 7. uv run port_scanner.py
 
-## Docs
+## Nmap docs
 https://nmap.org/book/man.html
