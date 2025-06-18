@@ -16,7 +16,7 @@ git clone https://github.com/batubyte/port-scanner.git
 Start-BitsTransfer -Source https://aka.ms/getwinget -Destination AppInstaller.msixbundle; Add-AppxPackage .\AppInstaller.msixbundle; Remove-Item .\AppInstaller.msixbundle
 
 ::Install Git
-winget install --id=Git.Git -e
+winget install --id=Git.Git -e --accept-package-agreements --accept-source-agreements
 
 ::Install uv
 ::Do Win + R -> cmd
