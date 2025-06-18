@@ -2,12 +2,12 @@
 ![image](https://github.com/user-attachments/assets/d987db90-aefd-4b9c-a828-7bfe7387e334)
 
 ## Installation
-### Linux
+### Linux (Ubuntu/Debian)
 ```bash
-cd ~/Documents
-curl -o port_scanner.py https://raw.githubusercontent.com/batubyte/port-scanner/refs/heads/main/port_scanner.py
+sudo apt install -y git
 curl -LsSf https://astral.sh/uv/install.sh | sh
-uv run port_scanner.py
+cd ~/Documents
+git clone https://github.com/batubyte/port-scanner.git
 ```
 ### Windows
 ```batch
