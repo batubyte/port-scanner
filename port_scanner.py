@@ -120,7 +120,7 @@ def valid_host(host):
         return False
     
 
-def parse_args(parser):
+def parse_args():
     parser.add_argument("-v", "--version", action="version", version=VERSION)
     parser.add_argument("-n", nargs=argparse.REMAINDER, help="Run nmap")
     parser.add_argument("target", nargs="?", help="IP address, hostname or domain")
@@ -129,8 +129,8 @@ def parse_args(parser):
 
 def main():
     parser = argparse.ArgumentParser(description=DESCRIPTION)
-    args = parse_args(parser)
-        
+    args = parser.parse_args()
+    
     if args.n is not None:
         install_nmap()
         if len(args.n) == 0:
@@ -145,10 +145,5 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        sys.exit(130)
-    except Exception as e:
-        print(f"Error: {e}")
-        sys.exit(1)
+    main()
+        
