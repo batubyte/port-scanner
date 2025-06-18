@@ -11,6 +11,10 @@ git clone https://github.com/batubyte/port-scanner.git
 ```
 ### Windows
 ```batch
+::Win + X -> A
+Invoke-WebRequest -Uri https://git-scm.com/download/win -OutFile git-installer.exe
+Start-Process .\git-installer.exe -Wait
+
 ::Win + R -> cmd
 winget install --id=Git.Git -e
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
