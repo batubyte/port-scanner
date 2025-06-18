@@ -124,11 +124,7 @@ def parse_args(parser):
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        prog=PROGRAM,
-        description=DESCRIPTION,
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
+    parser = argparse.ArgumentParser(prog=PROGRAM, description=DESCRIPTION)
     args = parse_args(parser)
     
     if args.n is not None:
