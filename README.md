@@ -12,13 +12,14 @@ git clone https://github.com/batubyte/port-scanner.git
 ### Windows
 ```batch
 ::Install WinGet
-::Win + X -> A
-Invoke-WebRequest -Uri https://git-scm.com/download/win -OutFile git-installer.exe
-Start-Process .\git-installer.exe -Wait
+::Do Win + X -> A
+Start-BitsTransfer -Source https://aka.ms/getwinget -Destination AppInstaller.msixbundle; Add-AppxPackage .\AppInstaller.msixbundle; Remove-Item .\AppInstaller.msixbundle
+
+::Install Git
+winget install --id=Git.Git -e
 
 ::Install uv
-::Win + R -> cmd
-winget install --id=Git.Git -e
+::Do Win + R -> cmd
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 set Path=%USERPROFILE%\.local\bin;%Path%
 
