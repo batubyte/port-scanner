@@ -11,15 +11,18 @@ git clone https://github.com/batubyte/port-scanner.git
 ```
 ### Windows
 ```batch
+::Install WinGet
 ::Win + X -> A
 Invoke-WebRequest -Uri https://git-scm.com/download/win -OutFile git-installer.exe
 Start-Process .\git-installer.exe -Wait
 
+::Install uv
 ::Win + R -> cmd
 winget install --id=Git.Git -e
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 set Path=%USERPROFILE%\.local\bin;%Path%
 
+:: Install project
 cd %USERPROFILE%\Documents
 git clone https://github.com/batubyte/port-scanner.git
 ```
