@@ -4,7 +4,7 @@
 ## Installation
 ### Linux (Ubuntu/Debian)
 ```bash
-sudo apt install -y git
+sudo apt update && sudo apt install -y git
 curl -LsSf https://astral.sh/uv/install.sh | sh
 cd ~/Documents
 git clone https://github.com/batubyte/port-scanner.git
