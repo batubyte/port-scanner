@@ -1,5 +1,5 @@
 # Port Scanner
-![image](https://github.com/user-attachments/assets/d84cc929-ec5d-416b-aab8-5622eadbe513)
+![image](https://github.com/user-attachments/assets/32276a99-882b-473a-b707-bd03625a8e03)
 
 ## Installation
 ### Linux (Ubuntu/Debian)
