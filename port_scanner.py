@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-Project: Port Scanner
-Description: Async port scanner with Nmap support
-Author: batubyte
-Date: 2025-06-17
-"""
-
 import subprocess
 import platform
 import argparse
@@ -16,7 +9,8 @@ import socket
 import sys
 import re
 
-DESCRIPTION = "Async port scanner with Nmap support"
+PROGRAM = "Port Scanner"
+DESCRIPTION = "Async port scanner with Nmap"
 VERSION = "0.1.1"
 
 RED = "\033[31m"
@@ -112,7 +106,7 @@ async def full_scan(host):
         pass
 
 
-def valid_host(host):
+def validate_host(host):
     try:
         socket.gethostbyname(host)
         return True
@@ -120,16 +114,22 @@ def valid_host(host):
         return False
     
 
-def parse_args():
-    parser.add_argument("-v", "--version", action="version", version=VERSION)
+def parse_args(parser):
+    parser.add_argument(
+        "-v", "--version", action="version", version=f"%(prog)s {VERSION}"
+    )
     parser.add_argument("-n", nargs=argparse.REMAINDER, help="Run nmap")
     parser.add_argument("target", nargs="?", help="IP address, hostname or domain")
     return parser.parse_args()
 
 
 def main():
-    parser = argparse.ArgumentParser(description=DESCRIPTION)
-    args = parser.parse_args()
+    parser = argparse.ArgumentParser(
+        prog=PROGRAM,
+        description=DESCRIPTION,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    args = parse_args(parser)
     
     if args.n is not None:
         install_nmap()
@@ -137,7 +137,7 @@ def main():
             subprocess.run(["nmap", "-h"])
         else:
             run_nmap(args.n)
-    elif args.target and valid_host(args.target):
+    elif args.target and validate_host(args.target):
         asyncio.run(full_scan(args.target))
     else:
         parser.print_help()
@@ -146,4 +146,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-        
+    
