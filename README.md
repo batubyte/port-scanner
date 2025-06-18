@@ -15,6 +15,7 @@ git clone https://github.com/batubyte/port-scanner.git
 winget install --id=Git.Git -e
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 set Path=%USERPROFILE%\.local\bin;%Path%
+
 cd %USERPROFILE%\Documents
 git clone https://github.com/batubyte/port-scanner.git
 ```
