@@ -13,10 +13,19 @@ uv run port_scanner.py
 ```batch
 Win + R -> cmd
 cd %USERPROFILE%\Documents
-curl -o port_scanner.py https://raw.githubusercontent.com/batubyte/port-scanner/refs/heads/main/port_scanner.py
+winget install --id=Git.Git -e
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 set Path=%USERPROFILE%\.local\bin;%Path%
-uv python install
+git clone https://github.com/your-username/your-project.git
+cd port-scanner
+uv sync
+```
+
+## Run
+```
+Win + R -> cmd
+cd %USERPROFILE%\Documents\port-scanner
+uv sync
 uv run port_scanner.py
 ```
 
