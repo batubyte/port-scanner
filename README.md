@@ -14,8 +14,7 @@
 
 ### 🐧 Linux / macOS
 1. Install Python using your package manager or from https://www.python.org/downloads
-2. Run:  
-   ``python3 -m pip install --upgrade pipx && python3 -m pipx ensurepath``
+2. ``python3 -m pip install --upgrade pipx && python3 -m pipx ensurepath``
 3. ``pipx install git+https://github.com/batubyte/port-scanner``
 4. ``port-scanner``
 
