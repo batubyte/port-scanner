@@ -20,7 +20,7 @@ rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.co
 ```
 #### ▶️ Run
 ```batch
-::Win + R -> cmd
+::Do Win + R -> cmd
 cd %USERPROFILE%\Documents\port-scanner
 uv sync & uv run port_scanner.py
 ```
