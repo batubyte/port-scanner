@@ -25,7 +25,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.com/batubyte/port-scanner.git "%USERPROFILE%\Documents\port-scanner"
 ```
 
-## ▶️ Run
+## ⚡ Run
 ### Linux
 ```bash
 cd ~/Documents/port-scanner
