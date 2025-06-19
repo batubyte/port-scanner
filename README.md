@@ -4,7 +4,7 @@
 ---
 
 ## 📦 Installation
-1. Install [Python](https://www.python.org/downloads) with **add to PATH** option and [pipx](https://pipx.pypa.io/latest/installation/#installing-pipx)
+1. Install [python](https://www.python.org/downloads) with **add to PATH** option and [pipx](https://pipx.pypa.io/latest/installation/#installing-pipx)
 2. Run ``pipx install git+https://github.com/batubyte/port-scanner``
 3. Run ``port-scanner``
 ---
