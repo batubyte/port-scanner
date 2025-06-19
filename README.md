@@ -29,7 +29,7 @@ rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.co
 ### Linux
 ```bash
 cd ~/Documents/port-scanner
- uv sync && uv run port_scanner.py -h
+uv sync && uv run port_scanner.py -h
 ```
 ### Windows
 ```batch
