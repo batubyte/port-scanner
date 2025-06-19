@@ -28,12 +28,14 @@ rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.co
 ## ⚡ Run
 ### Linux
 ```bash
-cd ~/Documents/port-scanner && uv sync && uv run port_scanner.py -h
+cd ~/Documents/port-scanner
+ uv sync && uv run port_scanner.py -h
 ```
 ### Windows
 ```batch
 :: do Win + R -> cmd
-cd %USERPROFILE%\Documents\port-scanner & uv sync & uv run port_scanner.py -h
+cd %USERPROFILE%\Documents\port-scanner
+uv sync & uv run port_scanner.py -h
 ```
 
 ## 📚 Nmap manual
