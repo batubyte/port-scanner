@@ -6,8 +6,7 @@
 ```bash
 sudo apt update && sudo apt install -y git
 curl -LsSf https://astral.sh/uv/install.sh | sh
-rm -rf ~/Documents/port-scanner
-git clone https://github.com/batubyte/port-scanner.git ~/Documents/port-scanner
+rm -rf ~/Documents/port-scanner && git clone https://github.com/batubyte/port-scanner.git ~/Documents/port-scanner
 ```
 ### Windows
 ```batch
