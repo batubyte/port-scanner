@@ -13,25 +13,11 @@
 ---
 
 ### 🐧 Linux / macOS (Terminal)
-1. Install Python 3.8+ using your package manager or from [python.org](https://www.python.org/downloads)
-
-2. Run:
-   ```bash
-   python3 -m pip install --upgrade pipx
-   python3 -m pipx ensurepath
-   ```
-
-3. **Restart your terminal**
-
-4. Install the tool:
-   ```bash
-   pipx install git+https://github.com/batubyte/port-scanner
-   ```
-
-5. Run it:
-   ```bash
-   port-scanner
-   ```
+1. Install Python using your package manager or from [python.org](https://www.python.org/downloads)
+2. Run:  
+   ``python3 -m pip install --upgrade pipx && python3 -m pipx ensurepath``
+3. ``pipx install git+https://github.com/batubyte/port-scanner``
+4. ``port-scanner``
 
 ---
 
