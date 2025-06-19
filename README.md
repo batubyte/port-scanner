@@ -1,41 +1,10 @@
 # 🛜 Port Scanner
 ![image](https://github.com/user-attachments/assets/31e01990-7348-4016-bd61-97a737fc0941)
 
-## 📦 Install
-### Linux (Ubuntu/Debian)
-```bash
-sudo apt update && sudo apt install -y git
-curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH="$HOME/.local/bin:$PATH"
-rm -rf ~/Documents/port-scanner && git clone https://github.com/batubyte/port-scanner.git ~/Documents/port-scanner && chmod +x ~/Documents/port-scanner/port_scanner.py
-```
-### Windows
-```batch
-:: WinGet
-:: do Win + X -> A
-Start-BitsTransfer -Source https://aka.ms/getwinget -Destination AppInstaller.msixbundle; Add-AppxPackage .\AppInstaller.msixbundle; Remove-Item .\AppInstaller.msixbundle
-
-:: Git
-winget install --id=Git.Git -e --accept-package-agreements --accept-source-agreements
-
-:: uv
-:: do Win + R -> cmd
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex" && setx Path=%USERPROFILE%\.local\bin;%Path%
-
-:: Repository
-rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.com/batubyte/port-scanner.git "%USERPROFILE%\Documents\port-scanner"
-```
-
-## ⚡ Run
-### Linux
-```bash
-cd ~/Documents/port-scanner
-uv sync && uv run port_scanner.py -h
-```
-### Windows
-```batch
-:: do Win + R -> cmd
-cd %USERPROFILE%\Documents\port-scanner
-uv sync & uv run port_scanner.py -h
+## 📦 Installation
+1. Install a recent version of Python (we require at least 3.12)
+2. Install pipx
+3. ``pipx install git+https://github.com/batubyte/port-scanner``
 ```
 
 ## 📚 Nmap manual
