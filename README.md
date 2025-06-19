@@ -3,11 +3,11 @@
 
 ## 📦 Install via pipx   
 Install [Python](https://www.python.org/downloads) with **"add to PATH"** option
-### install
+Install
 ```bash
 pipx install git+https://github.com/batubyte/port-scanner
 ```
-### start
+Start
 ```bash
 port_scanner
 ```
