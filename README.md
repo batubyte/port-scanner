@@ -6,14 +6,15 @@
 ## 📦 Installation
 
 ### 🪟 Windows
-1. Install the latest version of [Python](https://www.python.org/downloads)  
-   ✔ During installation, check **“Add Python to PATH”**
+1. Install Python from https://www.python.org/downloads  
+   ✔ During installation, check **"Add Python to PATH"**
 2. ``python -m pip install --upgrade pipx & python -m pipx ensurepath``
 3. ``pipx install git+https://github.com/batubyte/port-scanner``
 4. ``port-scanner``
 
 ### 🐧 Linux / macOS
-1. Install Python using your package manager or from https://www.python.org/downloads
+1. Install Python from https://www.python.org/downloads  
+   ✔ During installation, check **"Add Python to PATH"**
 2. ``python3 -m pip install --upgrade pipx && python3 -m pipx ensurepath``
 3. ``pipx install git+https://github.com/batubyte/port-scanner``
 4. ``port-scanner``
