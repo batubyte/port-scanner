@@ -1,7 +1,7 @@
-# Port Scanner
+# 🛜 Port Scanner
 ![image](https://github.com/user-attachments/assets/32276a99-882b-473a-b707-bd03625a8e03)
 
-## Install
+## 📦 Install
 ### Linux (Ubuntu/Debian)
 ```bash
 sudo apt update && sudo apt install -y git
@@ -25,7 +25,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.com/batubyte/port-scanner.git "%USERPROFILE%\Documents\port-scanner"
 ```
 
-## Run
+## ▶️ Run
 ### Linux
 ```bash
 cd ~/Documents/port-scanner
@@ -38,5 +38,5 @@ cd %USERPROFILE%\Documents\port-scanner
 uv sync & uv run port_scanner.py
 ```
 
-## Nmap docs
+## 📚 Nmap manual
 https://nmap.org/book/man.html
