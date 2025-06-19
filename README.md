@@ -6,11 +6,9 @@
 ### 🪟 Windows (CMD)
 1. Install the latest version of [Python](https://www.python.org/downloads)  
    ✔ During installation, check **“Add Python to PATH”**
-
 2. ``python -m pip install --upgrade pipx & python -m pipx ensurepath``
-3. **Close and reopen CMD**
-4. ``pipx install git+https://github.com/batubyte/port-scanner``
-5. ``port-scanner``
+3. ``pipx install git+https://github.com/batubyte/port-scanner``
+4. ``port-scanner``
 
 ---
 
