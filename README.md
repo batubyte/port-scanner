@@ -3,9 +3,10 @@
 
 ## 📦 Install via pipx   
 > Install [Python](https://www.python.org/downloads) with **"add to PATH"** option
-```bash
-pipx install git+https://github.com/batubyte/port-scanner
-```
+1. Install repository via pipx 
+  ```bash
+  pipx install git+https://github.com/batubyte/port-scanner
+  ```
 ```bash
 port_scanner
 ```
