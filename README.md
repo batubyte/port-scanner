@@ -3,7 +3,7 @@
 
 ## 📦 Installation
 
-### 🪟 Windows (CMD)
+### 🪟 Windows
 1. Install the latest version of [Python](https://www.python.org/downloads)  
    ✔ During installation, check **“Add Python to PATH”**
 2. ``python -m pip install --upgrade pipx & python -m pipx ensurepath``
@@ -12,7 +12,7 @@
 
 ---
 
-### 🐧 Linux / macOS (Terminal)
+### 🐧 Linux / macOS
 1. Install Python using your package manager or from [python.org](https://www.python.org/downloads)
 2. Run:  
    ``python3 -m pip install --upgrade pipx && python3 -m pipx ensurepath``
