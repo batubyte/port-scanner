@@ -38,5 +38,5 @@ cd %USERPROFILE%\Documents\port-scanner
 uv sync & uv run port_scanner.py
 ```
 
-## 📚 Nmap Manual
+## 📚 Nmap manual
 https://nmap.org/book/man.html
