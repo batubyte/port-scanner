@@ -2,7 +2,7 @@
 ![image](https://github.com/user-attachments/assets/32276a99-882b-473a-b707-bd03625a8e03)
 
 ## 🪟 Windows
-#### 📦 Installation
+### 📦 Installation
 ```batch
 ::Install WinGet
 ::Do Win + X -> A
@@ -32,7 +32,7 @@ sudo apt update && sudo apt install -y git
 curl -LsSf https://astral.sh/uv/install.sh | sh
 rm -rf ~/Documents/port-scanner && git clone https://github.com/batubyte/port-scanner.git ~/Documents/port-scanner
 ```
-#### ▶️ Run
+### ▶️ Run
 ```bash
 cd ~/Documents/port-scanner
 uv sync && uv run port_scanner.py
