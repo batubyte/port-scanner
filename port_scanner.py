@@ -11,7 +11,7 @@ import sys
 import re
 
 PROGRAM = "Port Scanner"
-DESCRIPTION = "Async port scanner with Nmap"
+DESCRIPTION = "An async port scanner with optional Nmap integration"
 VERSION = "0.1.1"
 
 RED = "\033[31m"
