@@ -18,7 +18,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 :: Install project
 rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.com/batubyte/port-scanner.git "%USERPROFILE%\Documents\port-scanner"
 ```
-# ▶️ Run
+### ▶️ Run
 ```batch
 ::Win + R -> cmd
 cd %USERPROFILE%\Documents\port-scanner
@@ -26,12 +26,13 @@ uv sync & uv run port_scanner.py
 ```
 
 ## 🐧 Linux (Ubuntu/Debian)
+### 📦 Installation
 ```bash
 sudo apt update && sudo apt install -y git
 curl -LsSf https://astral.sh/uv/install.sh | sh
 rm -rf ~/Documents/port-scanner && git clone https://github.com/batubyte/port-scanner.git ~/Documents/port-scanner
 ```
-# ▶️ Run
+### ▶️ Run
 ```bash
 cd ~/Documents/port-scanner
 uv sync && uv run port_scanner.py
