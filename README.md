@@ -5,8 +5,8 @@
 ### Linux (Ubuntu/Debian)
 ```bash
 sudo apt update && sudo apt install -y git
-curl -LsSf https://astral.sh/uv/install.sh | sh
-rm -rf ~/Documents/port-scanner && git clone https://github.com/batubyte/port-scanner.git ~/Documents/port-scanner
+curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH="$HOME/.local/bin:$PATH"
+rm -rf ~/Documents/port-scanner && git clone https://github.com/batubyte/port-scanner.git ~/Documents/port-scanner && chmod +x ~/Documents/port-scanner/port_scanner.py
 ```
 ### Windows
 ```batch
@@ -21,21 +21,19 @@ winget install --id=Git.Git -e --accept-package-agreements --accept-source-agree
 ::Do Win + R -> cmd
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex" && setx Path=%USERPROFILE%\.local\bin;%Path%
 
-:: Install project
+:: Install repositories
 rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.com/batubyte/port-scanner.git "%USERPROFILE%\Documents\port-scanner"
 ```
 
 ## ⚡ Run
 ### Linux
 ```bash
-cd ~/Documents/port-scanner
-uv sync && uv run port_scanner.py
+cd ~/Documents/port-scanner && uv sync && uv run port_scanner.py -h
 ```
 ### Windows
 ```batch
-::Win + R -> cmd
-cd %USERPROFILE%\Documents\port-scanner
-uv sync & uv run port_scanner.py
+::Do Win + R -> cmd
+cd %USERPROFILE%\Documents\port-scanner & uv sync & uv run port_scanner.py -h
 ```
 
 ## 📚 Nmap manual
