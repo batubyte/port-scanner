@@ -6,8 +6,8 @@
 ```bash
 sudo apt update && sudo apt install -y git
 curl -LsSf https://astral.sh/uv/install.sh | sh
-cd ~/Documents
-git clone https://github.com/batubyte/port-scanner.git
+rm -rf ~/Documents/port-scanner
+git clone https://github.com/batubyte/port-scanner.git ~/Documents/port-scanner
 ```
 ### Windows
 ```batch
@@ -20,12 +20,10 @@ winget install --id=Git.Git -e --accept-package-agreements --accept-source-agree
 
 ::Install uv
 ::Do Win + R -> cmd
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-set Path=%USERPROFILE%\.local\bin;%Path%
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex" && setx Path=%USERPROFILE%\.local\bin;%Path%
 
 :: Install project
-cd %USERPROFILE%\Documents
-git clone https://github.com/batubyte/port-scanner.git
+rmdir /s /q "%USERPROFILE%\Documents\file-crypter" & git clone https://github.com/batubyte/file-crypter.git "%USERPROFILE%\Documents\file-crypter"
 ```
 
 ## Run
