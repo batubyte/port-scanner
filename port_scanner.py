@@ -3,7 +3,6 @@
 import subprocess
 import platform
 import argparse
-import logging
 import asyncio
 import shutil
 import socket
@@ -21,18 +20,11 @@ CYAN = "\033[36m"
 BOLD = "\033[1m"
 RESET = "\033[0m"
 
-logging.basicConfig(
-    filename='output.log',
-    filemode='w',
-    level=logging.ERROR,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
 
 def install_nmap():
     if shutil.which("nmap"):
         return
-
+        
     answer = input("Nmap not found. Install? [Y/n]: ").strip().lower()
     if answer not in ("", "y", "yes"):
         sys.exit(1)
@@ -153,6 +145,6 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         sys.exit(130)
-    except Exception:
-        logging.critical("Unhandled exception occurred", exc_info=True)
+    except Exception as e:
+        print(f"Error: {e}")
         sys.exit(1)
