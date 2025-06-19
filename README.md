@@ -1,7 +1,7 @@
 # Port Scanner
 ![image](https://github.com/user-attachments/assets/32276a99-882b-473a-b707-bd03625a8e03)
 
-## Installation
+## Install
 ### Linux (Ubuntu/Debian)
 ```bash
 sudo apt update && sudo apt install -y git
