@@ -10,18 +10,18 @@ rm -rf ~/Documents/port-scanner && git clone https://github.com/batubyte/port-sc
 ```
 ### Windows
 ```batch
-::Install WinGet
-::Do Win + X -> A
+:: WinGet
+:: do Win + X -> A
 Start-BitsTransfer -Source https://aka.ms/getwinget -Destination AppInstaller.msixbundle; Add-AppxPackage .\AppInstaller.msixbundle; Remove-Item .\AppInstaller.msixbundle
 
-::Install Git
+:: Git
 winget install --id=Git.Git -e --accept-package-agreements --accept-source-agreements
 
-::Install uv
-::Do Win + R -> cmd
+:: uv
+:: do Win + R -> cmd
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex" && setx Path=%USERPROFILE%\.local\bin;%Path%
 
-:: Install repositories
+:: Repository
 rmdir /s /q "%USERPROFILE%\Documents\port-scanner" & git clone https://github.com/batubyte/port-scanner.git "%USERPROFILE%\Documents\port-scanner"
 ```
 
@@ -32,7 +32,7 @@ cd ~/Documents/port-scanner && uv sync && uv run port_scanner.py -h
 ```
 ### Windows
 ```batch
-::Do Win + R -> cmd
+:: do Win + R -> cmd
 cd %USERPROFILE%\Documents\port-scanner & uv sync & uv run port_scanner.py -h
 ```
 
