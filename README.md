@@ -5,7 +5,7 @@
 1. Install [Python](https://www.python.org/downloads) with **"add to PATH"** option
 2. Install [pipx](https://pipx.pypa.io/latest/installation/#installing-pipx)
 3. Run ``pipx install git+https://github.com/batubyte/port-scanner``
-4. Start ``port-scanner``
+4. Start ``port_scanner``
 
 ## 📚 Nmap manual
 https://nmap.org/book/man.html
