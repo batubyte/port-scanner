@@ -3,6 +3,7 @@
 import subprocess
 import platform
 import argparse
+import logging
 import asyncio
 import shutil
 import socket
@@ -19,6 +20,13 @@ YELLOW = "\033[33m"
 CYAN = "\033[36m"
 BOLD = "\033[1m"
 RESET = "\033[0m"
+
+logging.basicConfig(
+    filename='output.log',
+    filemode='w',
+    level=logging.ERROR,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 
 def install_nmap():
@@ -97,7 +105,7 @@ async def scan_port(host, port, sem):
             pass
 
 
-async def full_scan(host):
+async def scan_ports(host):
     sem = asyncio.Semaphore(500)
     tasks = [scan_port(host, port, sem) for port in range(1, 65536)]
     try:
@@ -134,12 +142,17 @@ def main():
         else:
             run_nmap(args.n)
     elif args.target and validate_host(args.target):
-        asyncio.run(full_scan(args.target))
+        asyncio.run(scan_ports(args.target))
     else:
         parser.print_help()
         sys.exit(1)
 
 
 if __name__ == "__main__":
-    main()
-    
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(130)
+    except Exception:
+        logging.critical("Unhandled exception occurred", exc_info=True)
+        sys.exit(1)
