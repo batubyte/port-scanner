@@ -38,7 +38,5 @@ cd %USERPROFILE%\Documents\port-scanner
 uv sync & uv run port_scanner.py
 ```
 
-## Nmap docs
+## 📚 Nmap docs
 https://nmap.org/book/man.html
-
-i want to see it like windows a part linux a par for both install and run
