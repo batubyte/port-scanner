@@ -7,7 +7,7 @@ pipx install git+https://github.com/batubyte/port-scanner
 pip install rich requests
 ```
 ```bash
-port_scanner
+port-scanner
 ```
 
 ## 📚 Nmap manual
