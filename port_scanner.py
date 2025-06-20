@@ -10,7 +10,7 @@ import sys
 import re
 
 PROGRAM = "port_scanner"
-DESCRIPTION = "An Nmap wrapper"
+DESCRIPTION = "An enhanced Nmap wrapper"
 VERSION = "0.1.2"
 
 console = Console()
@@ -91,12 +91,13 @@ def parse_args(parser):
     parser.add_argument(
         "-n", "--nmap", nargs=argparse.REMAINDER, help="run nmap with custom arguments"
     )
+    
     return parser.parse_args()
 
 
 def main():
     parser = argparse.ArgumentParser(
-        prog=PROGRAM, description=DESCRIPTION, add_help=False
+        prog=PROGRAM, add_help=False
     )
     args = parse_args(parser)
 
