@@ -6,7 +6,7 @@ description = "An enhanced Nmap wrapper"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
-dependencies = ["rich"]
+dependencies = ["rich", "requests"]
 
 [project.scripts]
 port-scanner = "port_scanner:main"
