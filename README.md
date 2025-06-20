@@ -4,7 +4,6 @@
 ## 📦 Installation
 ```bash
 pipx install git+https://github.com/batubyte/port-scanner
-pip install rich requests
 ```
 ```bash
 port-scanner
