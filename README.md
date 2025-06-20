@@ -1,5 +1,5 @@
 # 🔍 Port Scanner
-![image](https://github.com/user-attachments/assets/3703870d-e708-4f26-b66b-888b1c91a5c5)
+![image](https://github.com/user-attachments/assets/90c088d1-6cf4-4374-88da-26b5eeef65f3)
 
 ## 📦 Installation
 ```bash
