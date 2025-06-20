@@ -5,8 +5,10 @@ from rich.panel import Panel
 import subprocess
 import platform
 import argparse
+import requests
 import shutil
 import sys
+import os
 import re
 
 PROGRAM = "port_scanner"
@@ -22,13 +24,24 @@ def update():
     subprocess.run(["pipx", "install", "--force", "git+https://github.com/batubyte/port-scanner"], check=True)
 
 
+def get_latest_nmap_url():
+    url = "https://nmap.org/dist/"
+    resp = requests.get(url)
+    links = re.findall(r'href="(nmap-(\d+\.\d+)-setup\.exe)"', resp.text)
+    if not links:
+        return None
+    latest = max(links, key=lambda x: tuple(map(int, x[1].split('.'))))
+    return url + latest[0]
+
+
 def install_nmap(force=False):
     if not force and shutil.which("nmap"):
         return
-
-    answer = input("Nmap not found. Install? [Y/n]: ").strip().lower()
-    if answer not in ("", "y", "yes"):
-        sys.exit(1)
+    
+    if not force:
+        answer = input("Nmap not found. Install? [Y/n]: ").strip().lower()
+        if answer not in ("", "y", "yes"):
+            sys.exit(1)
 
     system = platform.system()
     if system == "Linux":
@@ -40,12 +53,27 @@ def install_nmap(force=False):
         elif shutil.which("yum"):
             subprocess.run(["sudo", "yum", "install", "-y", "nmap"], check=True)
         else:
-            console.print("No supported package manager found. Install nmap manually.", style="bold red")
+            error_console.print("No supported package manager found. Please install nmap manually.")
             sys.exit(1)
 
     elif system == "Windows":
-        # install nmap sliently
-        sys.exit(1)
+        url = get_latest_nmap_url()
+        if not url:
+            error_console.print("Failed to find the latest Nmap installer URL.")
+            sys.exit(1)
+
+        tmp_dir = os.environ.get("TEMP", "/tmp")
+        installer_path = os.path.join(tmp_dir, "nmap-setup.exe")
+
+        console.print(f"Downloading Nmap from {url}")
+        with requests.get(url, stream=True) as r:
+            r.raise_for_status()
+            with open(installer_path, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+
+        subprocess.Popen(["start", "", installer_path], shell=True)
+        console.print("Please complete the Nmap installation manually.")
 
 
 def run_nmap(args):
@@ -112,5 +140,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         sys.exit(130)
     except Exception as e:
-        error_console.print(f"Error: {e}")
+        error_console.log(f"Error: {e}")
         sys.exit(1)
