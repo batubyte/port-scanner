@@ -95,11 +95,15 @@ def run_nmap(args):
     styled_output = "\n".join(colored_output)
 
     console.print(
-        Panel(styled_output, title="nmap " + " ".join(args), border_style="cyan")
+        Panel(styled_output, title="nmap " + " ".join(args), border_style="cyan", width=100)
     )
 
 
-def parse_args(parser):
+def parse_args():
+    parser = argparse.ArgumentParser(
+        prog=PROGRAM, description=DESCRIPTION, add_help=False
+    )
+    
     parser.add_argument(
         "-v", "--version", action="version", version=f"%(prog)s version {VERSION}"
     )
@@ -112,25 +116,23 @@ def parse_args(parser):
     parser.add_argument(
         "-n", "--nmap", nargs=argparse.REMAINDER, help="run nmap with custom arguments"
     )
-    
-    return parser.parse_args()
 
-
-def main():
-    parser = argparse.ArgumentParser(
-        prog=PROGRAM, description=DESCRIPTION, add_help=False
-    )
-    args = parse_args(parser)
-
-    if len(sys.argv) == 1 or args.help:
+    if len(sys.argv) == 1 or '--help' in sys.argv or '-h' in sys.argv:
         console.print(
             Panel(
                 parser.format_help(),
                 title=" ".join(sys.argv),
                 border_style="cyan",
+                width=80,
             )
         )
-        return
+        sys.exit()
+    
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
 
     if args.update:
         update()
