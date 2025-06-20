@@ -97,7 +97,7 @@ def parse_args(parser):
 
 def main():
     parser = argparse.ArgumentParser(
-        prog=PROGRAM, add_help=False
+        prog=PROGRAM, description=DESCRIPTION, add_help=False
     )
     args = parse_args(parser)
 
