@@ -1,30 +1,31 @@
 #!/usr/bin/env python3
 
+from rich.console import Console
+from rich.panel import Panel
 import subprocess
 import platform
 import argparse
-import asyncio
 import shutil
-import socket
 import sys
 import re
 
-PROGRAM = "Port Scanner"
-DESCRIPTION = "An async port scanner with optional Nmap integration"
-VERSION = "0.1.1"
+PROGRAM = "port_scanner"
+DESCRIPTION = "An Nmap wrapper"
+VERSION = "0.1.2"
 
-RED = "\033[31m"
-GREEN = "\033[32m"
-YELLOW = "\033[33m"
-CYAN = "\033[36m"
-BOLD = "\033[1m"
-RESET = "\033[0m"
+console = Console()
+error_console = Console(stderr=True, style="bold red")
+
+
+def update():
+    install_nmap()
+    subprocess.run(["pipx", "install", "--force", "git+https://github.com/batubyte/port-scanner"], check=True)
 
 
 def install_nmap():
     if shutil.which("nmap"):
         return
-        
+
     answer = input("Nmap not found. Install? [Y/n]: ").strip().lower()
     if answer not in ("", "y", "yes"):
         sys.exit(1)
@@ -39,105 +40,74 @@ def install_nmap():
         elif shutil.which("yum"):
             subprocess.run(["sudo", "yum", "install", "-y", "nmap"], check=True)
         else:
-            print("No supported package manager found. Install nmap manually.")
+            console.print("No supported package manager found. Install nmap manually.", style="bold red")
             sys.exit(1)
-            
+
     elif system == "Windows":
-        print("Install nmap from https://nmap.org/download.html#windows")
-        print("Restart system after installation")
+        # install nmap sliently
         sys.exit(1)
 
     if shutil.which("nmap") is None:
-        print("Installation failed. Install nmap manually.")
+        console.print("Installation failed. Install nmap manually.", style="bold red")
         sys.exit(1)
 
 
 def run_nmap(args):
     cmd = ["nmap"] + args
     result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    output = result.stdout
+    output = result.stdout.strip()
 
-    ports_section = False
+    colored_output = []
     for line in output.splitlines():
-        line = line.strip()
+        line = re.sub(r"\bopen\b", "[green]open[/]", line)
+        line = re.sub(r"\bclosed\b", "[red]closed[/]", line)
+        line = re.sub(r"\bfiltered\b", "[yellow]filtered[/]", line)
+        colored_output.append(line)
 
-        state_colored = None
-        if ports_section and re.match(r"^\d+\/\w+\s", line):
-            port, state, *rest = line.split()
-            state_lower = state.lower()
-            if state_lower == "open":
-                state_colored = f"{GREEN}{state}{RESET}"
-            elif state_lower == "closed":
-                state_colored = f"{RED}{state}{RESET}"
-            elif state_lower == "filtered":
-                state_colored = f"{YELLOW}{state}{RESET}"
-            else:
-                state_colored = state
+    styled_output = "\n".join(colored_output)
 
-            service = rest[0] if rest else ""
-            print(f"{port:10} {state_colored:10} {service}")
-        elif line.startswith("Nmap scan report for"):
-            print(f"\n{CYAN}{line}{RESET}")
-            ports_section = False
-        elif line.startswith("PORT"):
-            print(f"{BOLD}{line}{RESET}")
-            ports_section = True
-        else:
-            print(line)
+    console.print(
+        Panel(
+            styled_output,
+            title="nmap " + " ".join(args),
+            border_style="cyan"
+        )
+    )
 
-
-async def scan_port(host, port, sem):
-    async with sem:
-        try:
-            reader, writer = await asyncio.open_connection(host, port)
-            print(f"{port}/tcp open")
-            writer.close()
-            await writer.wait_closed()
-        except:
-            pass
-
-
-async def scan_ports(host):
-    sem = asyncio.Semaphore(500)
-    tasks = [scan_port(host, port, sem) for port in range(1, 65536)]
-    try:
-        await asyncio.gather(*tasks)
-    except asyncio.CancelledError:
-        pass
-
-
-def validate_host(host):
-    try:
-        socket.gethostbyname(host)
-        return True
-    except socket.error:
-        return False
-    
 
 def parse_args(parser):
     parser.add_argument(
-        "-v", "--version", action="version", version=f"%(prog)s {VERSION}"
+        "-v", "--version", action="version", version=f"%(prog)s version {VERSION}"
     )
-    parser.add_argument("-n", nargs=argparse.REMAINDER, help="Run nmap")
-    parser.add_argument("target", nargs="?", help="IP address, hostname or domain")
+    parser.add_argument("-h", "--help", action="store_true", help="show this help message")
+    parser.add_argument("-u", "--update", action="store_true", help="update nmap and this program")
+    parser.add_argument("-n", "--nmap", nargs=argparse.REMAINDER, help="run nmap with custom arguments")
     return parser.parse_args()
 
 
 def main():
-    parser = argparse.ArgumentParser(prog=PROGRAM, description=DESCRIPTION)
+    parser = argparse.ArgumentParser(prog=PROGRAM, description=DESCRIPTION, add_help=False)
     args = parse_args(parser)
     
-    if args.n is not None:
+    if len(sys.argv) == 1 or args.help:
+        console.print(
+            Panel(
+                parser.format_help(),
+                title=' '.join(sys.argv),
+                border_style="cyan",
+            )
+        )
+        return
+    
+    if args.update:
+        update()
+
+    if args.nmap is not None:
         install_nmap()
-        if len(args.n) == 0:
-            subprocess.run(["nmap", "-h"])
+        if len(args.nmap) == 0:
+            run_nmap(["--help"])
         else:
-            run_nmap(args.n)
-    elif args.target and validate_host(args.target):
-        asyncio.run(scan_ports(args.target))
-    else:
-        parser.print_help()
-        sys.exit(1)
+            run_nmap(args.nmap)
 
 
 if __name__ == "__main__":
@@ -146,5 +116,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         sys.exit(130)
     except Exception as e:
-        print(f"Error: {e}")
+        error_console.print(f"Error: {e}")
         sys.exit(1)
