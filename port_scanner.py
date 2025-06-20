@@ -3,10 +3,12 @@
 from rich.console import Console
 from rich.panel import Panel
 import subprocess
+import requests
 import platform
 import argparse
 import shutil
 import sys
+import os
 import re
 
 PROGRAM = "port_scanner"
@@ -18,11 +20,21 @@ error_console = Console(stderr=True, style="bold red")
 
 
 def update():
-    install_nmap(force=True)
     subprocess.run(
         ["pipx", "install", "--force", "git+https://github.com/batubyte/port-scanner"],
         check=True,
     )
+    install_nmap(force=True)
+
+
+def get_latest_nmap_url():
+    url = "https://nmap.org/dist/"
+    resp = requests.get(url)
+    links = re.findall(r'href="(nmap-(\d+\.\d+)-setup\.exe)"', resp.text)
+    if not links:
+        return None
+    latest = max(links, key=lambda x: tuple(map(int, x[1].split('.'))))
+    return url + latest[0]
 
 
 def install_nmap(force=False):
@@ -49,14 +61,23 @@ def install_nmap(force=False):
             )
 
     elif system == "Windows":
-        if shutil.which("winget"):
-            subprocess.run(
-                ["winget", "install", "--id=Insecure.Nmap", "-e"], check=True
-            )
-        else:
-            error_console.print(
-                "Winget not found. Install it from https://aka.ms/getwinget"
-            )
+        url = get_latest_nmap_url()
+        if not url:
+            error_console.log("Failed to find the latest Nmap installer URL.")
+            sys.exit(1)
+
+        tmp_dir = os.environ.get("TEMP", "/tmp")
+        installer_path = os.path.join(tmp_dir, "nmap-setup.exe")
+
+        console.print(f"Downloading {url}")
+        with requests.get(url, stream=True) as r:
+            r.raise_for_status()
+            with open(installer_path, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+
+        subprocess.Popen(["start", "", installer_path], shell=True)
+        console.print("Please complete the Nmap installation manually.")
 
 
 def run_nmap(args):
@@ -86,7 +107,7 @@ def parse_args(parser):
         "-h", "--help", action="store_true", help="show this help message"
     )
     parser.add_argument(
-        "-u", "--update", action="store_true", help="update nmap and this program"
+        "-u", "--update", action="store_true", help="update port-scanner and nmap"
     )
     parser.add_argument(
         "-n", "--nmap", nargs=argparse.REMAINDER, help="run nmap with custom arguments"
