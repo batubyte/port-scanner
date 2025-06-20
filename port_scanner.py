@@ -18,12 +18,12 @@ error_console = Console(stderr=True, style="bold red")
 
 
 def update():
-    install_nmap()
+    install_nmap(force=True)
     subprocess.run(["pipx", "install", "--force", "git+https://github.com/batubyte/port-scanner"], check=True)
 
 
-def install_nmap():
-    if shutil.which("nmap"):
+def install_nmap(force=False):
+    if not force and shutil.which("nmap"):
         return
 
     answer = input("Nmap not found. Install? [Y/n]: ").strip().lower()
@@ -45,10 +45,6 @@ def install_nmap():
 
     elif system == "Windows":
         # install nmap sliently
-        sys.exit(1)
-
-    if shutil.which("nmap") is None:
-        console.print("Installation failed. Install nmap manually.", style="bold red")
         sys.exit(1)
 
 
