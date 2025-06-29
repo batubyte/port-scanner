@@ -11,7 +11,7 @@ import sys
 import os
 import re
 
-PROGRAM = "port_scanner"
+PROGRAM = "port-scanner"
 DESCRIPTION = "An enhanced Nmap wrapper"
 VERSION = "0.1.2"
 
