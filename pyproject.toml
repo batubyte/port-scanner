@@ -13,4 +13,3 @@ port-scanner = "port_scanner:main"
 
 [project.urls]
 Homepage = "https://github.com/batubyte/port-scanner"
-Discord = "https://discord.gg/6H6T8aNbC6"
