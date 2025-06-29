@@ -9,6 +9,6 @@ pipx install git+https://github.com/batubyte/port-scanner
 port-scanner
 ```
 
-## 📄 Nmap manual and scripts
-https://nmap.org/book/man.html  
-https://nmap.org/nsedoc/scripts
+## 📄 Documentation
+* [Nmap Manual](https://nmap.org/book/man.html)
+* [Nmap Scripting Engine](https://nmap.org/nsedoc/scripts)
