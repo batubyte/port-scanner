@@ -10,5 +10,5 @@ port-scanner
 ```
 
 ## 📄 Nmap manual and scripts
-https://nmap.org/book/man.html
+https://nmap.org/book/man.html  
 https://nmap.org/nsedoc/scripts
