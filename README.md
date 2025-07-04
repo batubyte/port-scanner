@@ -8,7 +8,7 @@ pipx install git+https://github.com/batubyte/port-scanner
 ```bash
 port-scanner
 ```
-[!] a
+
 ## 📄 Documentation
 * [Nmap Manual](https://nmap.org/book/man.html)
 * [Nmap Scripting Engine](https://nmap.org/nsedoc/scripts)
