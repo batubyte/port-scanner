@@ -1,4 +1,4 @@
-> ⚠️ Update coming soon
+⚠️ Update coming soon
 
 # 🔍 Port Scanner
 ![image](https://github.com/user-attachments/assets/3b61f869-c853-47c7-9a06-203e8b82d1fd)
