@@ -1,4 +1,4 @@
-> [!WARNING]
+> [!NOTE]
 > Update coming soon
 
 # 🔍 Port Scanner
