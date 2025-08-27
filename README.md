@@ -1,5 +1,5 @@
 ## 🔍 Port Scanner
-<img width="738" height="253" alt="image" src="https://github.com/user-attachments/assets/b0230c71-981a-4c53-ae47-47582017e13f" />
+<img width="734" height="246" alt="image" src="https://github.com/user-attachments/assets/05534976-1aca-4f88-815f-c407728268bb" />
 <img width="731" height="217" alt="image" src="https://github.com/user-attachments/assets/e538297c-bac4-48ba-bf03-97f7e9327448" />
 
 ### 📦 Installation
