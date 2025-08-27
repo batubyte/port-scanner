@@ -232,7 +232,7 @@ class RichCLI:
         )
 
         console.print(
-            f"\n[b]{PROGRAM}[/b] [magenta]v{VERSION}[/] 🔍\n[dim]{DESCRIPTION}\n",
+            f"\n[b]{PROGRAM}[/b] [magenta]v{VERSION}[/] \n[dim]{DESCRIPTION}\n",
             justify="center",
         )
         console.print(f"Usage: [b]{PROGRAM}[/b] [[b]options[/]] [b cyan]<...>\n")
@@ -248,7 +248,7 @@ class RichCLI:
             table.add_row(*opts, help_text)
 
         rich_console.print(
-            Panel(table, border_style="dim", title="Options", title_align="left")
+            Panel(table, border_style="dim", title="options", title_align="left")
         )
 
         footer_console = Console()
