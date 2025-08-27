@@ -235,7 +235,7 @@ class RichCLI:
             f"\n[b]{PROGRAM}[/b] [magenta]v{VERSION}[/] 🔍\n[dim]{DESCRIPTION}\n",
             justify="center",
         )
-        console.print(f"Usage: [b]{PROGRAM}[/b] [b][Options][/] [b cyan]<...>\n")
+        console.print(f"Usage: [b]{PROGRAM}[/b] [[b]options[/]] [b cyan]<...>\n")
 
         table = Table(highlight=True, box=None, show_header=False)
         for action in parser._actions:
