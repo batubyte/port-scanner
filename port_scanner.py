@@ -21,9 +21,15 @@ from rich.color import Color
 from rich.console import Console
 from rich.highlighter import RegexHighlighter
 from rich.panel import Panel
-from rich.progress import (BarColumn, DownloadColumn, Progress, TaskID,
-                           TextColumn, TimeRemainingColumn,
-                           TransferSpeedColumn)
+from rich.progress import (
+    BarColumn,
+    DownloadColumn,
+    Progress,
+    TaskID,
+    TextColumn,
+    TimeRemainingColumn,
+    TransferSpeedColumn,
+)
 from rich.table import Table
 from rich.text import Text
 from rich.theme import Theme
@@ -62,7 +68,7 @@ def run_nmap(*nmap_args: str) -> None:
         r"OUTPUT:",
         r"MISC:",
         r"EXAMPLES:",
-        r"SEE THE MAN PAGE"
+        r"SEE THE MAN PAGE",
     ]
 
     for header in section_headers:
@@ -111,7 +117,9 @@ def install_nmap(force=False):
         elif shutil.which("yum"):
             subprocess.run(["yum", "install", "-y", "nmap"], check=True)
         else:
-            raise RuntimeError("No supported package manager found. Please install Nmap manually.")
+            raise RuntimeError(
+                "No supported package manager found. Please install Nmap manually."
+            )
 
     elif system == "Windows":
         url = get_nmap_url()
@@ -134,6 +142,7 @@ def install_nmap(force=False):
             subprocess.run(["brew", "install", "nmap"], check=True)
         else:
             raise RuntimeError("Homebrew not found. Please install Homebrew first.")
+
 
 class Downloader:
     def __init__(self):
@@ -183,8 +192,11 @@ class Downloader:
                 for url in urls:
                     filename = url.split("/")[-1]
                     dest_path = os.path.join(dest_dir, filename)
-                    task_id = self.progress.add_task("download", filename=filename, start=False)
+                    task_id = self.progress.add_task(
+                        "download", filename=filename, start=False
+                    )
                     pool.submit(self.copy_url, task_id, url, dest_path)
+
 
 class RichCLI:
     @staticmethod
@@ -260,9 +272,7 @@ def main():
     parser.add_argument(
         "-u", "--update", action="store_true", help="Update port-scanner and Nmap"
     )
-    parser.add_argument(
-        "-n", "--nmap", nargs=argparse.REMAINDER, help="Run Nmap"
-    )
+    parser.add_argument("-n", "--nmap", nargs=argparse.REMAINDER, help="Run Nmap")
 
     if len(sys.argv) == 1 or sys.argv[1] in ("?", "-h", "--help"):
         RichCLI.print_help(parser)
@@ -280,6 +290,7 @@ def main():
     if args.nmap is not None:
         install_nmap()
         run_nmap(*args.nmap)
+
 
 if __name__ == "__main__":
     try:
